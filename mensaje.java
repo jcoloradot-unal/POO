@@ -12,6 +12,10 @@ class Mensaje {
 		this.emisor = emisor;
 		this.receptor = receptor;
 	}
+	
+	public String toString() {
+		return "Asunto: " + asunto + "\nCuerpa: " + cuerpo;
+	}
 
 	public String getMensajeId() {
 		return mensajeId;
