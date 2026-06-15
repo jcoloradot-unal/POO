@@ -30,7 +30,7 @@ public class Sistema {
            }
         }
       return false;
-}
+    }
 
 
     private boolean esAdmin() {
@@ -39,73 +39,73 @@ public class Sistema {
         }
         return false;
 
-}
+    }
 
-public boolean registrarUsuario(String nombreUsuario, String contrasena, int rol) {
-    if(esAdmin()) {
-        if(cantidadEmpleados < empleados.length) {
-            UsuarioEmpresa nuevoUsuario = new UsuarioEmpresa(nombreUsuario, contrasena, rol);
-            empleados[cantidadEmpleados] = nuevoUsuario;
-            this.cantidadEmpleados++;
-            return true;
+    public boolean registrarUsuario(String nombreUsuario, String contrasena, int rol) {
+        if(esAdmin()) {
+            if(cantidadEmpleados < empleados.length) {
+                UsuarioEmpresa nuevoUsuario = new UsuarioEmpresa(nombreUsuario, contrasena, rol);
+                empleados[cantidadEmpleados] = nuevoUsuario;
+                this.cantidadEmpleados++;
+                return true;
+            }else {
+                System.out.println("No se pueden registrar más usuarios, capacidad máxima alcanzada.");
+                return false;
+            }
         }else {
-            System.out.println("No se pueden registrar más usuarios, capacidad máxima alcanzada.");
+            System.out.println("Solo el administrador puede registrar nuevos usuarios.");
             return false;
         }
-    }else {
-        System.out.println("Solo el administrador puede registrar nuevos usuarios.");
-        return false;
+
     }
 
-}
+    public void EliminarUsuario(long idUsuario) {
+        if(esAdmin()) {
+            int posicion = -1;
+            for(int i = 0; i < this.cantidadEmpleados; i++) {
+                if(empleados[i].getId() == idUsuario) {
+                    posicion = i;
+                    break;
+                }
+            }
+            if(posicion != -1) {
+                for(int i = posicion; i < this.cantidadEmpleados - 1; i++) {
+                    empleados[i] = empleados[i + 1];
+                }
+                empleados[this.cantidadEmpleados - 1] = null;
+                this.cantidadEmpleados--;
+                System.out.println("Usuario eliminado exitosamente.");
+        }else {
+                System.out.println("Usuario no encontrado.");
+            }
+        }else {
+            System.out.println("Solo el administrador puede eliminar usuarios.");
+        }
+    }
 
-public void EliminarUsuario(String idUsuario) {
+    public UsuarioEmpresa buscarUsuario(long idUsuario) {
+        for(int i = 0; i <cantidadEmpleados; i++) {
+            if(empleados[i].getId() == idUsuario) {
+                return empleados[i];
+            }
+        }
+        return null;
+    }
+
+    public String imprimirUsuarios() {
     if(esAdmin()) {
-        int posicion = -1;
-        for(int i = 0; i < this.cantidadEmpleados; i++) {
-            if(empleados[i].getId().equals(idUsuario)) {
-                posicion = i;
-                break;
-            }
+        String listado = "Usuarios registrados:\n";
+        for(int i = 0; i <cantidadEmpleados; i++) {
+            listado += "ID: " + empleados[i].getId() + ", | Nombre: " + empleados[i].getNombre()+ "\n";
         }
-        if(posicion != -1) {
-            for(int i = posicion; i < this.cantidadEmpleados - 1; i++) {
-                empleados[i] = empleados[i + 1];
-            }
-            empleados[this.cantidadEmpleados - 1] = null;
-            this.cantidadEmpleados--;
-            System.out.println("Usuario eliminado exitosamente.");
-    }else {
-            System.out.println("Usuario no encontrado.");
-        }
-    }else {
-        System.out.println("Solo el administrador puede eliminar usuarios.");
+        return listado;
+        }else {
+            return "Solo el administrador puede ver la lista de usuarios.";
+
     }
-}
-
-public UsuarioEmpresa buscarUsuario(String idUsuario) {
-    for(int i = 0; i <cantidadEmpleados; i++) {
-        if(empleados[i].getId().equals(idUsuario)) {
-            return empleados[i];
-        }
     }
-    return null;
-}
-
-public String imprimirUsuarios() {
-   if(esAdmin()) {
-       String listado = "Usuarios registrados:\n";
-       for(int i = 0; i <cantidadEmpleados; i++) {
-           listado += "ID: " + empleados[i].getId() + ", | Nombre: " + empleados[i].getNombre()+ "\n";
-       }
-      return listado;
-    }else {
-         return "Solo el administrador puede ver la lista de usuarios.";
-
-}
-}
-public void cerrarSesion() {
-    this.usuarioActivo = null;
-    System.out.println("Sesión cerrada exitosamente.");   
-}
+    public void cerrarSesion() {
+        this.usuarioActivo = null;
+        System.out.println("Sesión cerrada exitosamente.");   
+    }
 }

@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 class Mensaje {
 	String mensajeId;
 	String asunto;
@@ -29,7 +31,7 @@ class Mensaje {
 	public String getEmisor() {
 		return emisor;
 	}
-	public String getReceptor() {
+	public UsuarioEmpresa getReceptor() {
 		return receptor;
 	}
 
