@@ -33,11 +33,12 @@ public class Sistema {
 }
 
 
-    private boolean esAdmin() {
-        if(this.usuarioActivo != null && this.usuarioActivo.getRol() == 1) {
-            return true;
-        }
-        return false;
+public boolean esAdmin() {
+    if(this.usuarioActivo != null && this.usuarioActivo.getRol() == 1) {
+        return true;
+    }
+    
+    return false;
 
 }
 
@@ -59,7 +60,7 @@ public boolean registrarUsuario(String nombreUsuario,long id, String contrasena,
 
 }
 
-public void EliminarUsuario(long idUsuario) {
+public void eliminarUsuario(long idUsuario) {
     if(esAdmin()) {
         int posicion = -1;
         for(int i = 0; i < this.cantidadEmpleados; i++) {
