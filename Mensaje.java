@@ -16,7 +16,7 @@ class Mensaje {
 	}
 	
 	public String toString() {
-		return "Asunto: " + asunto + "\nCuerpa: " + cuerpo;
+		return "Id del mensaje:"+mensajeId+"\nEnviado por:"+emisor+"\nReceptor:"+receptor.getNombre()+"\nAsunto: " + asunto + "\nCuerpa: " + cuerpo;
 	}
 
 	public String getMensajeId() {
