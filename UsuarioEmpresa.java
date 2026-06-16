@@ -22,20 +22,14 @@ public class UsuarioEmpresa extends Usuario{
     public String getContraseña(){
         return this.contraseña;
     }
-    public void setRol(int rol){
-        this.rol=rol;
-    }
-    public void setContraseña(String c){
-        this.contraseña=c;
-    }
     
     
     public boolean modificarContraseña(String actual, String nueva){
-        if (actual!=getContraseña()){
+        if (actual!=contraseña){
             return false;
         }
         else{
-            setContraseña(nueva);
+            contraseña=nueva;
             return true;
         }
     }  
@@ -47,9 +41,9 @@ public class UsuarioEmpresa extends Usuario{
                 receptor.agregarMensajeRecibido(msg);
                 for (int b=i; b<CantidadBorradores-1; b++)
                     borradores[b]=borradores[b+1];
-                borradores[CantidadBorradores-1]= null;
-                CantidadBorradores --;
-                return true;
+                    borradores[CantidadBorradores-1]= null;
+                    CantidadBorradores --;
+                    return true;
             }
         }
         return false;
