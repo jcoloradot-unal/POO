@@ -37,7 +37,7 @@ public class UsuarioEmpresa extends Usuario{
         for(int i= 0;i<borradores.length; i++){
             if ((borradores[i]).getMensajeId()== MsgId){
                 Mensaje msg = borradores[i];
-                UsuarioEmpresa receptor = msg.getReceptor();    
+                UsuarioEmpresa receptor = msg.getReceptor();
                 receptor.agregarMensajeRecibido(msg);
                 for (int b=i; b<CantidadBorradores-1; b++)
                     borradores[b]=borradores[b+1];

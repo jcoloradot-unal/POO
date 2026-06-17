@@ -109,7 +109,4 @@ public void cerrarSesion() {
     this.usuarioActivo = null;
     System.out.println("Sesión cerrada exitosamente.");   
 }
-public UsuarioEmpresa[] getEmpleados(){
-    return empleados;
-}
 }
