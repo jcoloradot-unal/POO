@@ -1,6 +1,7 @@
+package Mensajes;
 import java.util.UUID;
 
-class Mensaje {
+public class Mensaje {
 	String mensajeId;
 	String asunto;
 	String cuerpo;

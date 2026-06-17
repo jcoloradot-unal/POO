@@ -1,3 +1,4 @@
+package Mensajes;
 public class Usuario {
     private String nombre;
     private long id;

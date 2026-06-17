@@ -1,3 +1,4 @@
+package Mensajes;
 public class Direccion {
     private String calle;
     private String nomenclatura;

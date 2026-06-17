@@ -1,15 +1,16 @@
+package Mensajes;
 public class UsuarioEmpresa extends Usuario{
     private int rol;
-    private String contraseña;
+    private String contrasena;
     private Mensaje[] mensajesRecibidos;
     private Mensaje[] borradores;
     private int CantidadMensajes;
     private int CantidadBorradores;
         
-    public UsuarioEmpresa(String nombre, long id, String contraseña, int rol){
+    public UsuarioEmpresa(String nombre, long id, String contrasena, int rol){
         super(nombre, id);
         this.rol=rol;
-        this.contraseña=contraseña;
+        this.contrasena=contrasena;
         this.mensajesRecibidos=new Mensaje[50];
         this.borradores= new Mensaje[20];
         this.CantidadMensajes = 0;
@@ -19,29 +20,22 @@ public class UsuarioEmpresa extends Usuario{
     public int getRol(){
         return this.rol;
     }
-    public String getContraseña(){
-        return this.contraseña;
+    public String getContrasena(){
+        return this.contrasena;
     }
-    public void setRol(int rol){
-        this.rol=rol;
-    }
-    public void setContraseña(String c){
-        this.contraseña=c;
-    }
-    
-    
+
     public boolean modificarContraseña(String actual, String nueva){
-        if (actual!=getContraseña()){
+        if (!actual.equals(getContrasena())){
             return false;
         }
         else{
-            setContraseña(nueva);
+            contrasena = nueva;
             return true;
         }
     }  
     public boolean enviarMensaje(String MsgId){
         for(int i= 0;i<borradores.length; i++){
-            if ((borradores[i]).getMensajeId()== MsgId){
+            if ((borradores[i]).getMensajeId().equals(MsgId)){
                 Mensaje msg = borradores[i];
                 UsuarioEmpresa receptor = msg.getReceptor();
                 receptor.agregarMensajeRecibido(msg);
@@ -64,15 +58,15 @@ public class UsuarioEmpresa extends Usuario{
     public void editarMensaje (String mensajeId, String asunto, String cuerpo, UsuarioEmpresa receptor){
         int indice = 0;
         for(int i=0; i<CantidadBorradores; i++){
-            if ((borradores[i]).getMensajeId()==mensajeId){
+            if ((borradores[i]).getMensajeId().equals(mensajeId)){
                 indice = i;
                 break;
             }
         }
-        if (asunto!=""){
+        if (!"".equals(asunto)){
             (borradores[indice]).setAsunto(asunto);
         }
-        if (cuerpo!=""){
+        if (!"".equals(cuerpo)){
             (borradores[indice]).setCuerpo(cuerpo);
         }
         if (receptor!=null){
