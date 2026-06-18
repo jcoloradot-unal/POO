@@ -30,9 +30,16 @@ public class AgregarUsuario extends Menu {
             rol = 1;
         }
 
-        gestor.sistema.registrarUsuario(nombre, id, contrasena, rol);
+        boolean exitoso = gestor.sistema.registrarUsuario(nombre, id, contrasena, rol);
 
-        System.out.println("Usuario registrado correctamente");
-        gestor.cambiarMenu("Usuarios");
+        if (exitoso) {
+            System.out.println("Usuario registrado correctamente");
+            gestor.cambiarMenu("Usuarios");
+        } else {
+            System.out.println("El nombre de usuario ya se encuentra registrado en el sistema. Intente otro nombre de usuario");
+
+            gestor.cambiarMenu("Agregar Usuario_");
+        }
+
     }
 }

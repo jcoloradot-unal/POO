@@ -48,6 +48,13 @@ public class Sistema {
     public boolean registrarUsuario(String nombreUsuario,long id, String contrasena, int rol) {
         if(esAdmin()) {
             if(cantidadEmpleados < empleados.length) {
+                // El nombre de usuario no se puede repetir
+                for (int i = 0; i < cantidadEmpleados; i++) {
+                    if ( empleados[i].getNombre().equals(nombreUsuario)) {
+                        return  false;
+                    }
+                }
+
                 UsuarioEmpresa nuevoUsuario = new UsuarioEmpresa(nombreUsuario, id, contrasena, rol);
                 empleados[cantidadEmpleados] = nuevoUsuario;
                 this.cantidadEmpleados++;
@@ -57,7 +64,7 @@ public class Sistema {
                 return false;
             }
         }else {
-            System.out.println("Solo el administrador puede registrar nuevos usuarios.");
+            System.err.println("Solo el administrador puede registrar nuevos usuarios.");
             return false;
         }
 
@@ -84,6 +91,33 @@ public class Sistema {
             }
         }else {
             System.out.println("Solo el administrador puede eliminar usuarios.");
+        }
+    }
+
+    public boolean eliminarUsuario(String nombreUsuario) {
+        if(esAdmin()) {
+            int posicion = -1;
+            for(int i = 0; i < this.cantidadEmpleados; i++) {
+                if(empleados[i].getNombre().equals(nombreUsuario)) {
+                    posicion = i;
+                    break;
+                }
+            }
+            if(posicion != -1) {
+                for(int i = posicion; i < this.cantidadEmpleados - 1; i++) {
+                    empleados[i] = empleados[i + 1];
+                }
+                empleados[this.cantidadEmpleados - 1] = null;
+                this.cantidadEmpleados--;
+                //System.out.println("Usuario eliminado exitosamente.");
+                return true;
+            } else {
+                //System.out.println("Usuario no encontrado.");
+                return false;
+            }
+        } else {
+            System.err.println("Solo el administrador puede eliminar usuarios.");
+            return false;
         }
     }
 

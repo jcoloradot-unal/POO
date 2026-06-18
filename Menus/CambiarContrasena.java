@@ -17,11 +17,10 @@ public class CambiarContrasena extends Menu {
 
         if (!exitoso) {
             System.out.println("La contraseña actual es incorrecta");
-            gestor.cambiarMenu("Menu Principal");
+        } else {
+            System.out.println("La contraseña ha sido modificada correctamente");
         }
-
-        System.out.println("La contraseña ha sido modificada correctamente");
-
+        
         gestor.cambiarMenu("Menu Principal");
     }
 }

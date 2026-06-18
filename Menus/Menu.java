@@ -64,8 +64,11 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         
         int input = sc.nextInt();
-        
-        if (input > 0 && input <= opcionesValidas.size()) {
+
+        if (input < 0 || input > opcionesValidas.size()) {
+            System.out.println("Ingrese una opciòn valida");
+            iniciarSeleccion();
+        } else {
             gestor.cambiarMenu((String) opcionesValidas.get(input - 1));
         }
 
