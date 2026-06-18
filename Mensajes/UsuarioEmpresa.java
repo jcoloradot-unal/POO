@@ -34,26 +34,31 @@ public class UsuarioEmpresa extends Usuario{
         }
     }  
     public boolean enviarMensaje(String MsgId){
-        for(int i= 0;i<borradores.length; i++){
+        for(int i = 0; i < CantidadBorradores; i++){
             if ((borradores[i]).getMensajeId().equals(MsgId)){
                 Mensaje msg = borradores[i];
                 UsuarioEmpresa receptor = msg.getReceptor();
-                receptor.agregarMensajeRecibido(msg);
-                for (int b=i; b<CantidadBorradores-1; b++)
-                    borradores[b]=borradores[b+1];
-                borradores[CantidadBorradores-1]= null;
-                CantidadBorradores --;
+                receptor.agregarMensajeRecibido(msg); 
+                
+                for (int b = i; b < CantidadBorradores - 1; b++) {
+                    borradores[b] = borradores[b + 1];
+                }
+                
+                borradores[CantidadBorradores - 1] = null;
+                CantidadBorradores--;
                 return true;
             }
         }
         return false;
     }
-    public void agregarMensajeRecibido (Mensaje msg){
-        mensajesRecibidos [CantidadMensajes]= msg;
+    public void agregarMensajeRecibido(Mensaje msg){
+        mensajesRecibidos[CantidadMensajes] = msg;
+        CantidadMensajes++; // ¡Clave! Sumamos 1 a la bandeja de entrada
     }
-    public void redactarMensaje (String cuerpo, String asunto, UsuarioEmpresa receptor){
-        Mensaje msg = new Mensaje(asunto, cuerpo, getNombre(),receptor);
-        borradores[CantidadBorradores]= msg;
+    public void redactarMensaje(String cuerpo, String asunto, UsuarioEmpresa receptor){
+        Mensaje msg = new Mensaje(asunto, cuerpo, getNombre(), receptor);
+        borradores[CantidadBorradores] = msg;
+        CantidadBorradores++; // ¡Clave! Avanzamos el contador para no sobreescribir
     }
     public void editarMensaje (String mensajeId, String asunto, String cuerpo, UsuarioEmpresa receptor){
         int indice = 0;
