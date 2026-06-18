@@ -10,6 +10,12 @@ public class EliminarUsuario extends Menu{
         System.out.println("Ingrese el nombre del usuario que desea eliminar");
         String nombre = sc.next();
 
+        if (nombre.equals("admin")) {
+            System.out.println("Este usuario no se puede eliminar");
+            gestor.cambiarMenu("Usuarios");
+            return;
+        }
+
         if (gestor.sistema.getUsuarioActivo().getNombre().equals(nombre)) {
             System.out.println("No puede eliminar el usuario al cual pertenece la sesiòn actual");
             gestor.cambiarMenu("Usuarios");

@@ -33,11 +33,27 @@ public class UsuarioEmpresa extends Usuario{
             return true;
         }
     }  
-    public boolean enviarMensaje(String MsgId){
+
+    public Mensaje getMensaje(String msgId) {
+        for(int i = 0; i < CantidadBorradores; i++){
+            if ((borradores[i]).getMensajeId().equals(msgId)){
+                return borradores[i];
+            }
+        }
+
+        return null;
+    }
+
+    public String enviarMensaje(String MsgId){
         for(int i = 0; i < CantidadBorradores; i++){
             if ((borradores[i]).getMensajeId().equals(MsgId)){
                 Mensaje msg = borradores[i];
                 UsuarioEmpresa receptor = msg.getReceptor();
+
+                if (receptor == null) {
+                    return "El receptor de este mensaje ya no existe";
+                }
+
                 receptor.agregarMensajeRecibido(msg); 
                 
                 for (int b = i; b < CantidadBorradores - 1; b++) {
@@ -46,19 +62,21 @@ public class UsuarioEmpresa extends Usuario{
                 
                 borradores[CantidadBorradores - 1] = null;
                 CantidadBorradores--;
-                return true;
+                return "";
             }
         }
-        return false;
+        return "No se encontró ningún borrador con ese ID.";
     }
     public void agregarMensajeRecibido(Mensaje msg){
         mensajesRecibidos[CantidadMensajes] = msg;
         CantidadMensajes++; // ¡Clave! Sumamos 1 a la bandeja de entrada
     }
-    public void redactarMensaje(String cuerpo, String asunto, UsuarioEmpresa receptor){
+    public Mensaje redactarMensaje(String cuerpo, String asunto, UsuarioEmpresa receptor){
         Mensaje msg = new Mensaje(asunto, cuerpo, getNombre(), receptor);
         borradores[CantidadBorradores] = msg;
         CantidadBorradores++; // ¡Clave! Avanzamos el contador para no sobreescribir
+
+        return msg;
     }
     public void editarMensaje (String mensajeId, String asunto, String cuerpo, UsuarioEmpresa receptor){
         int indice = 0;

@@ -1,5 +1,6 @@
 package Menus;
 
+import Mensajes.Mensaje;
 import java.util.Scanner;
 
 public class EnviarMensaje extends Menu {
@@ -15,12 +16,20 @@ public class EnviarMensaje extends Menu {
         System.out.println("\nIngrese el ID del mensaje que desea despachar:");
         String msgId = sc.nextLine();
         
-        boolean exitoso = gestor.sistema.getUsuarioActivo().enviarMensaje(msgId);
+        Mensaje msg = gestor.sistema.getUsuarioActivo().getMensaje(msgId);
+
+        if (gestor.sistema.buscarUsuario(msg.getReceptor().getId()) == null) {
+            System.out.println("El receptor ya no existe");
+            gestor.cambiarMenu("Mensajes");
+            return;
+        }
+
+        String resultado = gestor.sistema.getUsuarioActivo().enviarMensaje(msgId);
         
-        if (exitoso) {
+        if (resultado.equals("")) {
             System.out.println("¡El mensaje ha sido enviado correctamente!");
         } else {
-            System.out.println("Error: No se encontró ningún borrador con ese ID.");
+            System.out.println(resultado);
         }
         
         System.out.println("\nIngrese cualquier letra y presione Enter para volver");
