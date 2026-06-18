@@ -22,5 +22,6 @@ public class BuscarUsuario extends Menu {
         }
 
         gestor.cambiarMenu("Usuarios");
+        gestor.sistema.getUsuarioActivo()
     }
 }
