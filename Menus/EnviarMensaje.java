@@ -18,6 +18,12 @@ public class EnviarMensaje extends Menu {
         
         Mensaje msg = gestor.sistema.getUsuarioActivo().getMensaje(msgId);
 
+        if (msg == null) {
+            System.out.println("El mensaje especificado no esiste");
+            gestor.cambiarMenu("Mensajes");
+            return;
+        }
+
         if (gestor.sistema.buscarUsuario(msg.getReceptor().getId()) == null) {
             System.out.println("El receptor ya no existe");
             gestor.cambiarMenu("Mensajes");

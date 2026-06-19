@@ -10,7 +10,54 @@ public class Sistema {
         this.empleados = new UsuarioEmpresa[100];
         this.cantidadEmpleados = 0;
 
-        registrarUsuarioInicial("admin",45142, "123", 1);
+        Fecha fecha1 = new Fecha(8,9,1991);
+        Direccion dir1 = new Direccion();
+        dir1.setCalle("15");
+        dir1.setNomenclatura("22-61");
+        dir1.setBarrio("Cuba");
+        dir1.setCiudad("Pereira");
+
+        registrarUsuario("admin", 0000, "0000", 1, fecha1, dir1, 300000000, "a@g.com");
+
+        Fecha fecha2 = new Fecha(16,10,1987);
+        Direccion dir2 = new Direccion();
+        dir2.setCalle("48");
+        dir2.setNomenclatura("22-61");
+        dir2.setBarrio("Palermo");
+        dir2.setCiudad("Manizales");
+        dir2.setEdificio("El dorado");
+        dir2.setApto("215");
+
+        registrarUsuario("julian", 7841564, "123", 0, fecha2, dir2, 5325325, "f@ga.com");
+
+        Fecha fecha3 = new Fecha(21,6,1996);
+            Direccion dir3 = new Direccion();
+                dir3.setCalle("43");
+                dir3.setNomenclatura("33-11");
+                dir3.setBarrio("Rodadero");
+                dir3.setCiudad("Santa Marta");
+
+        registrarUsuario("juan", 7841542, "123", 0, fecha3, dir3, 5325322, "g@ga.com");
+
+        Fecha fecha4 = new Fecha (8,1,2008);
+            Direccion dir4 = new Direccion();
+                dir4.setCalle("77DD");
+                dir4.setNomenclatura("85B-16");
+                dir4.setBarrio("Robledo");
+                dir4.setCiudad("Medellin");
+        
+        registrarUsuario("carlos", 784164, "profeteamo", 0, fecha4, dir4, 5325320, "h@ga.com");
+
+        Fecha fecha5 = new Fecha(28,2,2001);
+            Direccion dir5 = new Direccion();
+                dir5.setCalle("45");
+                dir5.setNomenclatura("55-23");
+                dir5.setBarrio("San Antonio");
+                dir5.setCiudad("Rionegro");
+                dir5.setEdificio("Monaco");
+                dir5.setApto("501");
+        
+        registrarUsuario("abelardito", 78413632, "eltigre", 0, fecha5, dir5, 53253654, "l@ga.com");
 
     }
 
@@ -45,8 +92,8 @@ public class Sistema {
 
     }
 
-    public boolean registrarUsuario(String nombreUsuario,long id, String contrasena, int rol) {
-        if(esAdmin()) {
+    public boolean registrarUsuario(String nombreUsuario,long id, String contrasena, int rol, Fecha fechaNacimiento, Direccion dirreccion, long telefono, String correo) {
+        if(esAdmin() || usuarioActivo == null) {
             if(cantidadEmpleados < empleados.length) {
                 // El nombre de usuario no se puede repetir
                 for (int i = 0; i < cantidadEmpleados; i++) {
@@ -56,6 +103,10 @@ public class Sistema {
                 }
 
                 UsuarioEmpresa nuevoUsuario = new UsuarioEmpresa(nombreUsuario, id, contrasena, rol);
+                nuevoUsuario.setFechaNacimiento(fechaNacimiento);
+                nuevoUsuario.setTel(311845229);
+                nuevoUsuario.setEmail("laura@gmail.com");
+                nuevoUsuario.setDir(dirreccion);
                 empleados[cantidadEmpleados] = nuevoUsuario;
                 this.cantidadEmpleados++;
                 return true;

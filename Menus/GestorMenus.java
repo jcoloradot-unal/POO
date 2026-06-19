@@ -35,7 +35,7 @@ public class GestorMenus {
         menus.put("Usuarios", menu);
 
         menu = new Menu();
-        menu.agregarOpciones(new String[] {"Bandeja de Entrada", "Redactar Mensaje", "Enviar Mensaje", "Borradores", "Menu Principal"});
+        menu.agregarOpciones(new String[] {"Bandeja de Entrada", "Redactar Mensaje", "Enviar Mensaje", "Borradores", "Editar Mensaje", "Menu Principal"});
         menus.put("Mensajes", menu);
 
         menus.put("Cambiar Contrasena", new CambiarContrasena());
@@ -57,5 +57,7 @@ public class GestorMenus {
         menus.put("Enviar Mensaje", new EnviarMensaje());
 
         menus.put("Borradores", new Borradores());
+        
+        menus.put("Editar Mensaje", new EditarMensaje());
     }
 }
